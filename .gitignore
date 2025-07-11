@@ -207,9 +207,9 @@ marimo/_lsp/
 __marimo__/
 
 # venv
-.bin/
-.etc/
-.include/
-.lib/
-.lib64/
-.share/
+bin/
+etc/
+include/
+lib/
+lib64
+share/
