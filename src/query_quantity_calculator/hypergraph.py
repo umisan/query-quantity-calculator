@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import networkx as nx
 import numpy as np
-from parser import DatalogParser
+from .parser import DatalogParser
 
 
 class Hypergraph:

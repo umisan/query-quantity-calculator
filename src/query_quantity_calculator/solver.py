@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import linprog
 from typing import List, Tuple
-from hypergraph import Hypergraph
+from .hypergraph import Hypergraph
 
 
 class QuerySolver:

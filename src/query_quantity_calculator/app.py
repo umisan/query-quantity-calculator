@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-from parser import DatalogParser
-from hypergraph import Hypergraph
-from solver import QuerySolver
+from .parser import DatalogParser
+from .hypergraph import Hypergraph
+from .solver import QuerySolver
 
 
 def main():
