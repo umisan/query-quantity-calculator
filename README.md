@@ -30,6 +30,26 @@ Query Quantity Calculatorは、Datalog風のリスト形式で与えられた結
 
 ## 🚀 インストール
 
+### 🐳 Dockerを使用する場合（推奨）
+
+1. **リポジトリのクローン**
+   ```bash
+   git clone https://github.com/umisan/query-quantity-calculator.git
+   cd query-quantity-calculator
+   ```
+
+2. **Dockerイメージのビルド**
+   ```bash
+   docker build -t query-quantity-calculator .
+   ```
+
+3. **コンテナの実行**
+   ```bash
+   docker run -p 8501:8501 query-quantity-calculator
+   ```
+
+### 🐍 ローカル環境での実行
+
 1. **リポジトリのクローン**
    ```bash
    git clone https://github.com/umisan/query-quantity-calculator.git
@@ -45,11 +65,17 @@ Query Quantity Calculatorは、Datalog風のリスト形式で与えられた結
 
 ### Webアプリの起動
 
+**Dockerを使用する場合：**
+```bash
+docker run -p 8501:8501 query-quantity-calculator
+```
+
+**ローカル環境の場合：**
 ```bash
 streamlit run run_app.py
 ```
 
-ブラウザで `http://localhost:8501` が自動的に開きます。
+どちらの方法でも、ブラウザで `http://localhost:8501` が自動的に開きます。
 
 ### クエリ入力例
 
