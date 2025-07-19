@@ -1,24 +1,24 @@
 # Query Quantity Calculator
 
-## 📌 概要
+## 📌 Overview
 
-Query Quantity Calculatorは、Datalog風のリスト形式で与えられた結合クエリ（Conjunctive Query）に対して、以下の特徴量を計算するWebアプリケーションです：
+Query Quantity Calculator is a web application that computes the following characteristics for conjunctive queries given in Datalog-style list format:
 
 - **Fractional Edge Cover** (`ρ*`)
 - **Fractional Edge Packing** (`τ*`)
-- **AGM Bound**（各リレーションサイズが1と仮定）
+- **AGM Bound** (assuming each relation size is 1)
 
-研究や教育の場において、クエリ構造の理論的性質をすばやく評価することを目的としています。
+It aims to quickly evaluate the theoretical properties of query structures in research and educational settings.
 
-## ✨ 機能
+## ✨ Features
 
-- Datalog風クエリのパースとハイパーグラフ構造の構築
-- 線形計画問題を解いてfractional edge coverとpackingを計算
-- AGM Boundの計算
-- インタラクティブなハイパーグラフの可視化
-- 結果の詳細な分析と表示
+- Parse Datalog-style queries and build hypergraph structures
+- Solve linear programming problems to compute fractional edge cover and packing
+- Calculate AGM Bound
+- Interactive hypergraph visualization
+- Detailed analysis and display of results
 
-## 📋 要件
+## 📋 Requirements
 
 - Python 3.8+
 - Streamlit
@@ -28,58 +28,58 @@ Query Quantity Calculatorは、Datalog風のリスト形式で与えられた結
 - NetworkX
 - Pandas
 
-## 🚀 インストール
+## 🚀 Installation
 
-### 🐳 Dockerを使用する場合（推奨）
+### 🐳 Using Docker (Recommended)
 
-1. **リポジトリのクローン**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/umisan/query-quantity-calculator.git
    cd query-quantity-calculator
    ```
 
-2. **Dockerイメージのビルド**
+2. **Build Docker image**
    ```bash
    docker build -t query-quantity-calculator .
    ```
 
-3. **コンテナの実行**
+3. **Run container**
    ```bash
    docker run -p 8501:8501 query-quantity-calculator
    ```
 
-### 🐍 ローカル環境での実行
+### 🐍 Local Environment
 
-1. **リポジトリのクローン**
+1. **Clone the repository**
    ```bash
    git clone https://github.com/umisan/query-quantity-calculator.git
    cd query-quantity-calculator
    ```
 
-2. **依存関係のインストール**
+2. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-## 💻 使用方法
+## 💻 Usage
 
-### Webアプリの起動
+### Starting the Web Application
 
-**Dockerを使用する場合：**
+**Using Docker:**
 ```bash
 docker run -p 8501:8501 query-quantity-calculator
 ```
 
-**ローカル環境の場合：**
+**Local environment:**
 ```bash
 streamlit run run_app.py
 ```
 
-どちらの方法でも、ブラウザで `http://localhost:8501` が自動的に開きます。
+Either method will automatically open `http://localhost:8501` in your browser.
 
-### クエリ入力例
+### Query Input Example
 
-アプリケーションでは、以下の形式でDatalog風クエリを入力します：
+In the application, enter Datalog-style queries in the following format:
 
 ```
 R(a, b)
@@ -87,59 +87,59 @@ S(b, c)
 T(a, c)
 ```
 
-### 出力結果
+### Output Results
 
-計算結果として以下の情報が表示されます：
+The calculation results display the following information:
 
-- **頂点数 (|V|)**: ハイパーグラフの頂点数
-- **エッジ数 (|E|)**: ハイパーグラフのエッジ数
-- **ハイパーグラフのrank**: 最大エッジサイズ
-- **Fractional Edge Cover (ρ*)**: 最小エッジカバー
-- **Fractional Edge Packing (τ*)**: 最大エッジパッキング
-- **AGM Bound**: 全リレーションサイズ=1での理論限界
-- **ρ* × τ***: 積の値（|V|以下であることの確認）
+- **Number of Vertices (|V|)**: Number of vertices in the hypergraph
+- **Number of Edges (|E|)**: Number of edges in the hypergraph
+- **Hypergraph Rank**: Maximum edge size
+- **Fractional Edge Cover (ρ*)**: Minimum edge cover
+- **Fractional Edge Packing (τ*)**: Maximum edge packing
+- **AGM Bound**: Theoretical limit with all relation sizes = 1
+- **ρ* × τ***: Product value (verification that it's ≤ |V|)
 
-### 可視化
+### Visualization
 
-ハイパーグラフの構造がインタラクティブなグラフとして表示され、クエリの構造を視覚的に理解できます。
+The hypergraph structure is displayed as an interactive graph, allowing visual understanding of the query structure.
 
-## 📁 プロジェクト構造
+## 📁 Project Structure
 
 ```
 query-quantity-calculator/
 ├── src/
 │   └── query_quantity_calculator/
 │       ├── __init__.py
-│       ├── app.py                # Streamlitアプリケーション
-│       ├── hypergraph.py          # ハイパーグラフ構造とその操作
-│       ├── parser.py              # Datalogクエリパーサー
-│       └── solver.py              # 線形計画ソルバー
+│       ├── app.py                # Streamlit application
+│       ├── hypergraph.py          # Hypergraph structure and operations
+│       ├── parser.py              # Datalog query parser
+│       └── solver.py              # Linear programming solver
 ├── tests/
 │   └── __init__.py
-├── run_app.py                     # アプリケーション起動スクリプト
-├── requirements.txt               # 依存関係
-├── CLAUDE.md                      # プロジェクト詳細仕様
-├── README.md                      # このファイル
+├── run_app.py                     # Application startup script
+├── requirements.txt               # Dependencies
+├── CLAUDE.md                      # Detailed project specifications
+├── README.md                      # This file
 └── LICENSE
 ```
 
-## 🧮 理論的背景
+## 🧮 Theoretical Background
 
-このツールは以下の理論に基づいています：
+This tool is based on the following theories:
 
-- **Fractional Edge Cover**: ハイパーグラフの各頂点を覆うのに必要な最小エッジ重み
-- **Fractional Edge Packing**: 重複しないエッジの最大重み
-- **AGM Bound**: 結合クエリの最適な実行時間の理論限界
+- **Fractional Edge Cover**: Minimum edge weight needed to cover each vertex in a hypergraph
+- **Fractional Edge Packing**: Maximum weight of non-overlapping edges
+- **AGM Bound**: Theoretical limit for optimal execution time of join queries
 
-## 📚 参考文献
+## 📚 References
 
 - Atserias, A., Grohe, M., & Marx, D. (2008). "Size bounds and query plans for relational joins"
-- 結合クエリとハイパーグラフ理論に関する研究
+- Research on join queries and hypergraph theory
 
-## 📄 ライセンス
+## 📄 License
 
-このプロジェクトはMITライセンスの下で公開されています。詳細は[LICENSE](LICENSE)ファイルをご覧ください。
+This project is released under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## 🤝 貢献
+## 🤝 Contributing
 
-プロジェクトへの貢献を歓迎します。バグ報告、機能要求、プルリクエストなどお気軽にお寄せください。
+Contributions to the project are welcome. Please feel free to submit bug reports, feature requests, pull requests, etc.
