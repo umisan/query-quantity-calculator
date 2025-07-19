@@ -7,27 +7,27 @@ from .solver import QuerySolver
 
 def main():
     st.title("Query Quantity Calculator")
-    st.markdown("Datalog風のクエリからFractional Edge Cover、Packing、AGM Boundを計算します")
+    st.markdown("Calculate Fractional Edge Cover, Packing, and AGM Bound from Datalog-style queries")
     
-    st.subheader("📥 クエリ入力")
-    st.markdown("**形式例:**")
+    st.subheader("📥 Query Input")
+    st.markdown("**Format Example:**")
     st.code("""R(a, b)
 S(b, c)
 T(a, c)""")
     
     query_input = st.text_area(
-        "Datalogクエリを入力してください:",
+        "Enter your Datalog query:",
         value="R(a, b)\nS(b, c)\nT(a, c)",
         height=150
     )
     
-    if st.button("計算実行"):
+    if st.button("Execute Calculation"):
         try:
             parser = DatalogParser()
             relations = parser.parse_query(query_input)
             
             if not relations:
-                st.error("有効なクエリが入力されていません")
+                st.error("No valid query has been entered")
                 return
             
             hypergraph = Hypergraph()
@@ -44,19 +44,19 @@ T(a, c)""")
             rank = hypergraph.get_rank()
             product = rho_star * tau_star
             
-            st.subheader("📊 解析結果")
+            st.subheader("📊 Analysis Results")
             
             results_df = pd.DataFrame({
-                "項目": [
-                    "頂点数 (|V|)",
-                    "エッジ数 (|E|)",
-                    "ハイパーグラフのrank",
+                "Item": [
+                    "Number of Vertices (|V|)",
+                    "Number of Edges (|E|)",
+                    "Hypergraph Rank",
                     "Fractional Edge Cover (ρ*)",
                     "Fractional Edge Packing (τ*)",
                     "AGM Bound",
                     "ρ* × τ*"
                 ],
-                "値": [
+                "Value": [
                     vertex_count,
                     edge_count,
                     rank,
@@ -69,45 +69,45 @@ T(a, c)""")
             
             st.dataframe(results_df, use_container_width=True)
             
-            st.subheader("📈 解釈")
+            st.subheader("📈 Interpretation")
             col1, col2 = st.columns(2)
             
             with col1:
                 st.metric(
-                    label="ρ* × τ* ≤ |V| の確認",
+                    label="Verification: ρ* × τ* ≤ |V|",
                     value=f"{product:.3f} ≤ {vertex_count}",
-                    delta=f"差: {vertex_count - product:.3f}"
+                    delta=f"Difference: {vertex_count - product:.3f}"
                 )
             
             with col2:
                 ratio = product / vertex_count if vertex_count > 0 else 0
                 st.metric(
-                    label="比率 (ρ* × τ*) / |V|",
+                    label="Ratio (ρ* × τ*) / |V|",
                     value=f"{ratio:.3f}",
-                    delta=f"{(1-ratio)*100:.1f}% の余裕"
+                    delta=f"{(1-ratio)*100:.1f}% margin"
                 )
             
-            st.subheader("🎨 ハイパーグラフ可視化")
+            st.subheader("🎨 Hypergraph Visualization")
             visualization = hypergraph.create_visualization()
             if visualization:
                 st.plotly_chart(visualization, use_container_width=True)
             else:
-                st.warning("ハイパーグラフを表示できません")
+                st.warning("Unable to display hypergraph")
             
-            st.subheader("🔍 クエリ詳細")
+            st.subheader("🔍 Query Details")
             relations_df = pd.DataFrame({
-                "リレーション名": [rel[0] for rel in relations],
-                "引数": [", ".join(rel[1]) for rel in relations],
-                "アリティ": [len(rel[1]) for rel in relations]
+                "Relation Name": [rel[0] for rel in relations],
+                "Arguments": [", ".join(rel[1]) for rel in relations],
+                "Arity": [len(rel[1]) for rel in relations]
             })
             st.dataframe(relations_df, use_container_width=True)
             
         except ValueError as e:
-            st.error(f"パース エラー: {e}")
+            st.error(f"Parse Error: {e}")
         except RuntimeError as e:
-            st.error(f"計算エラー: {e}")
+            st.error(f"Calculation Error: {e}")
         except Exception as e:
-            st.error(f"予期しないエラー: {e}")
+            st.error(f"Unexpected Error: {e}")
 
 
 if __name__ == "__main__":

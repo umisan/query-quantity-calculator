@@ -48,7 +48,7 @@ class Hypergraph:
         return self.edges[edge_index][0]
     
     def create_visualization(self):
-        """ハイパーグラフの可視化を作成"""
+        """Create hypergraph visualization"""
         if not self.vertices or not self.edges:
             return None
         
@@ -111,8 +111,8 @@ class Hypergraph:
                     opacity=0.3,
                     line=dict(width=2, color=colors[i % len(colors)]),
                     hoverinfo='text',
-                    hovertext=f"リレーション: {edge_name}<br>頂点: {', '.join(edge_vertex_list)}",
-                    name=f"リレーション {edge_name}",
+                    hovertext=f"Relation: {edge_name}<br>Vertices: {', '.join(edge_vertex_list)}",
+                    name=f"Relation {edge_name}",
                     showlegend=True,
                     mode='lines'
                 ))
@@ -122,8 +122,8 @@ class Hypergraph:
                     x=edge_x, y=edge_y,
                     line=dict(width=4, color=colors[i % len(colors)]),
                     hoverinfo='text',
-                    hovertext=f"リレーション: {edge_name}<br>頂点: {', '.join(edge_vertex_list)}",
-                    name=f"リレーション {edge_name}",
+                    hovertext=f"Relation: {edge_name}<br>Vertices: {', '.join(edge_vertex_list)}",
+                    name=f"Relation {edge_name}",
                     showlegend=True,
                     mode='lines'
                 ))
@@ -140,19 +140,19 @@ class Hypergraph:
             text=vertex_labels,
             textposition="middle center",
             hoverinfo='text',
-            hovertext=[f"頂点: {label}" for label in vertex_labels],
-            name="頂点（属性）",
+            hovertext=[f"Vertex: {label}" for label in vertex_labels],
+            name="Vertices (Attributes)",
             showlegend=True
         ))
         
         # レイアウトを設定
         fig.update_layout(
-            title="ハイパーグラフ構造",
+            title="Hypergraph Structure",
             showlegend=True,
             hovermode='closest',
             margin=dict(b=20,l=5,r=5,t=40),
             annotations=[ dict(
-                text="白い円: 頂点（属性）, 色つき領域: ハイパーエッジ（リレーション）",
+                text="White circles: vertices (attributes), colored areas: hyperedges (relations)",
                 showarrow=False,
                 xref="paper", yref="paper",
                 x=0.005, y=-0.002,
