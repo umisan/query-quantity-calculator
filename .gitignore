@@ -213,3 +213,6 @@ include/
 lib/
 lib64
 share/
+
+# temp directories
+tmp/
