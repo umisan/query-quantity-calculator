@@ -39,7 +39,7 @@ T(a, c)
 
 ---
 
-## ⚙️ 機能要件（Functional Requirements
+## ⚙️ 機能要件（Functional Requirement）
 
 | ID  | 機能内容                                                                |
 |-----|-------------------------------------------------------------------------|
@@ -47,5 +47,15 @@ T(a, c)
 | F-2 | 線形計画問題を解き、fractional edge cover（ρ*）と packing（τ*）を求める |
 | F-3 | AGM Bound を計算（全リレーションサイズ = 1 を仮定）                     |
 | F-4 | 結果を Streamlit 上にテーブルで表示する                                 |
+
+---
+
+## 開発ルール（Development Rule）
+
+以下の開発ルールを遵守してください。
+
+- ファイルの追加・削除を行った際はREADMEのProject Structureを更新する
+- 依存ライブラリの追加・削除・更新を行った場合はREADMEのRequirementsを更新する
+- pipやpythonコマンドは./binディレクトリ配下のものを利用する
 
 ---
